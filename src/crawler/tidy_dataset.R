@@ -95,14 +95,14 @@ CleanDataset <- function(dataset) {
 
     # Remove missing dimensions
     dataset <- filter(dataset, ! grepl("(gallery|institution|notes|references)",
-                               RealDimensions, ignore.case = TRUE))
+                               RealDimensions, ignore.case = TRUE)) %>% data.table
     dataset <- dataset[RealDimensions %like% "[0-9]"]
 
     # Remove some painting IDs
     dataset <- dataset[PaintingID %like% "[0-9]"]
 
     # Remove some artists
-    dataset <- filter(dataset, ! grepl("^\\|", Artist))
+    dataset <- filter(dataset, ! grepl("^\\|", Artist)) %>% data.table
 
     # Parse RealDimensions
     dataset[, RealDimensions:=chartr("A-Z,", "a-z.", RealDimensions)]
@@ -122,8 +122,8 @@ CleanDataset <- function(dataset) {
 
     # Remove duplicated painting IDs by keeping the larger images
     dataset <- dataset %>%
-    arrange(desc(PixelHeight), desc(PixelWidth)) %>%
-    unique(by = "PaintingID") %>% setkey("PageID")
+        arrange(desc(PixelHeight), desc(PixelWidth)) %>%
+        unique(by = "PaintingID") %>% data.table %>% setkey("PageID")
 
     return (dataset)
 }
@@ -215,7 +215,7 @@ if (! interactive()) {
     dataset <- CleanDataset(dataset)
 
     # Filter density
-    dataset <- FilterMinimumDensity(dataset, defaultDensity)
+    dataset <- FilterMinimumDensity(dataset, density)
 
     # Write output csv file
     WriteCSV(dataset, output)
