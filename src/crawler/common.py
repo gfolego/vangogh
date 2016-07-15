@@ -17,7 +17,7 @@ from functools import total_ordering
 
 
 # Some constants
-API_URL = 'http://commons.wikimedia.org/w/api.php'
+API_URL = 'https://commons.wikimedia.org/w/api.php'
 
 
 # Some global values
