@@ -1,4 +1,4 @@
-## From Impressionism to Expressionism: Automatically Identifying Van Gogh's Paintings
+# From Impressionism to Expressionism: Automatically Identifying Van Gogh's Paintings
 
 This is the source code used in the paper
 "From Impressionism to Expressionism: Automatically
@@ -16,21 +16,20 @@ Anderson Rocha ([anderson.rocha@ic.unicamp.br](mailto:anderson.rocha@ic.unicamp.
 If you find this work useful in your research, please cite!  :-)
 
 
-#### Quick Guide
+---
+
+### Quick Guide
 
 Pre-requisites
 
 - ImageMagick
-
 - Parallel
-
 - Python, and the following packages:
     - hurry.filesize
     - numpy
     - progressbar2
     - scikit-image
     - wikitools
-
 - R, and the following packages:
     - argparse
     - data.table
