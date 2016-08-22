@@ -85,7 +85,7 @@ Requirements
 
 Create a directory for resources.
 ```bash
-mkdir -pv res/img/patch
+mkdir -pv res/{img/patch,feats}
 ```
 
 Extract patches from each image.
@@ -93,11 +93,10 @@ Extract patches from each image.
 find res/img/resz/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir res/img/patch/
 ```
 
-Extract features from each path.
+Extract features from each path. In our work, we used the *VGG 19-layer model*, which is available at [http://www.robots.ox.ac.uk/~vgg/research/very_deep/](http://www.robots.ox.ac.uk/~vgg/research/very_deep/).
 ```bash
-mkdir -pv res/feats
 ls res/img/patch/ > res/img/patch_list.txt
-python src/analysis/caffe_extract_features.py --proto <VGG_ILSVRC_19_layers_deploy.prototxt> --model <VGG_ILSVRC_19_layers.caffemodel> --list res/img/patch_list.txt --input res/img/patch/ --output res/feats/
+python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list res/img/patch_list.txt --input res/img/patch/ --output res/feats/
 ```
 
 
