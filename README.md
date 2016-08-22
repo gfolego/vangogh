@@ -69,7 +69,7 @@ Resize images to the standard density.
 python src/analysis/resize_images.py --csv res/db/db.csv --original res/img/orig/ --resized res/img/resz/
 ```
 
-Dataset done. The CSV file is at *res/db/db.csv* and the standardized images are at *res/img/resz*.
+Dataset done. The CSV file is at `res/db/db.csv` and the standardized images are at `res/img/resz/`.
 Note: the file naming standard according to author has been applied manually.
 
 
@@ -77,6 +77,7 @@ Note: the file naming standard according to author has been applied manually.
 
 Requirements
 
+- Caffe
 - Parallel
 - Python, and the following packages:
     - scikit-image
@@ -90,6 +91,13 @@ mkdir -pv res/img/patch
 Extract patches from each image.
 ```bash
 find res/img/resz/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir res/img/patch/
+```
+
+Extract features from each path.
+```bash
+mkdir -pv res/feats
+ls res/img/patch/ > res/img/patch_list.txt
+python src/analysis/caffe_extract_features.py --proto <VGG_ILSVRC_19_layers_deploy.prototxt> --model <VGG_ILSVRC_19_layers.caffemodel> --list res/img/patch_list.txt --input res/img/patch/ --output res/feats/
 ```
 
 

@@ -58,7 +58,7 @@ N_ITER = 10
 
 WINDOW_SIZE = 224
 
-CAFFE_CHUNK_SIZE = 10
+CAFFE_BATCH_SIZE = 10
 
 
 # Some global values
