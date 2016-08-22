@@ -20,15 +20,15 @@ If you find this work useful in your research, please cite!  :-)
 
 ### Quick Guide
 
-Pre-requisites
+#### Creating the dataset
+
+Requirements
 
 - ImageMagick
-- Parallel
 - Python, and the following packages:
     - hurry.filesize
     - numpy
     - progressbar2
-    - scikit-image
     - wikitools
 - R, and the following packages:
     - argparse
@@ -38,7 +38,7 @@ Pre-requisites
 
 Create a directory for resources.
 ```bash
-mkdir -pv res/{db,img/{orig,resz,patch}}
+mkdir -pv res/{db,img/{orig,resz}}
 ```
 
 Define the URL to be crawled. This is just an example. In our work, we crawled more than 200 different URLs.
@@ -51,7 +51,10 @@ Crawl URL and collect metadata.
 python src/crawler/crawl2csv.py --url "$url" --csv res/db/"$url"
 ```
 
-Parse and clean up collected metadata. The default value for minimum density is 196.3, but we set a different value here just as an example. Also, at this point, it is possible to provide multiple files at once, even with duplicated entries. 
+Parse and clean up collected metadata.
+The default value for minimum density is 196.3, but we set a different value here just as an example.
+Also, at this point, it is possible to provide multiple files at once, even with duplicated entries (as shown).
+Note: the density ratio filter has been applied manually.
 ```bash
 Rscript src/crawler/tidy_dataset.R --density 95 --output res/db/db.csv res/db/"$url" res/db/"$url"
 ```
@@ -66,9 +69,29 @@ Resize images to the standard density.
 python src/analysis/resize_images.py --csv res/db/db.csv --original res/img/orig/ --resized res/img/resz/
 ```
 
-This step is optional. In our method, we extract patches from each image.
+Dataset done. The CSV file is at *res/db/db.csv* and the standardized images are at *res/img/resz*.
+Note: the file naming standard according to author has been applied manually.
+
+
+#### Using our method
+
+Requirements
+
+- Parallel
+- Python, and the following packages:
+    - scikit-image
+
+
+Create a directory for resources.
+```bash
+mkdir -pv res/img/patch
+```
+
+Extract patches from each image.
 ```bash
 find res/img/resz/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir res/img/patch/
 ```
 
+
+(to be continued ...)
 
