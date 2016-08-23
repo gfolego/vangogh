@@ -20,6 +20,10 @@ If you find this work useful in your research, please cite!  :-)
 
 ### Quick Guide
 
+General note: all the scripts presented here have a `--help` argument,
+which describes the script and possible parameters.
+
+
 #### Creating the dataset
 
 Requirements
@@ -59,7 +63,7 @@ Rscript src/crawler/tidy_dataset.R --density 95 --ratio 0.15 --output res/db/db.
 ```
 
 Dataset done, and the CSV file is at `res/db/db.csv`.
-Now, you may choose to continue with your newly created dataset, or with the original *vgdb_2016.csv*.
+Now, you may choose to continue with your newly created dataset, or with the original **vgdb_2016.csv**.
 
 
 Download images.
