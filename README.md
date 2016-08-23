@@ -70,7 +70,8 @@ Download images.
 ```bash
 python src/crawler/download_images_from_csv.py --csv res/db/db.csv --directory res/img/orig/
 ```
-Note: images with with less than 75% of JPEG quality were manually removed.
+Note: images with with less than 75% of JPEG quality were manually removed
+(both images and respective entries in the CSV file).
 
 
 Resize images to the standard density.
