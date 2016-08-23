@@ -52,24 +52,28 @@ python src/crawler/crawl2csv.py --url "$url" --csv res/db/"$url"
 ```
 
 Parse and clean up collected metadata.
-The default value for minimum density is 196.3, but we set a different value here just as an example.
+We set different values here just as a working example.
 Also, at this point, it is possible to provide multiple files at once, even with duplicated entries (as shown).
-Note: the density ratio filter has been applied manually.
 ```bash
-Rscript src/crawler/tidy_dataset.R --density 95 --output res/db/db.csv res/db/"$url" res/db/"$url"
+Rscript src/crawler/tidy_dataset.R --density 95 --ratio 0.15 --output res/db/db.csv res/db/"$url" res/db/"$url"
 ```
+
+Dataset done, and the CSV file is at `res/db/db.csv`.
+Now, you may choose to continue with your newly created dataset, or with the original *vgdb_2016.csv*.
+
 
 Download images.
 ```bash
 python src/crawler/download_images_from_csv.py --csv res/db/db.csv --directory res/img/orig/
 ```
+Note: images with with less than 75% of JPEG quality were manually removed.
+
 
 Resize images to the standard density.
 ```bash
 python src/analysis/resize_images.py --csv res/db/db.csv --original res/img/orig/ --resized res/img/resz/
 ```
 
-Dataset done. The CSV file is at `res/db/db.csv` and the standardized images are at `res/img/resz/`.
 Note: the file naming standard according to author has been applied manually.
 
 
@@ -93,7 +97,8 @@ Extract patches from each image.
 find res/img/resz/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir res/img/patch/
 ```
 
-Extract features from each path. In our work, we used the *VGG 19-layer model*, which is available at [http://www.robots.ox.ac.uk/~vgg/research/very_deep/](http://www.robots.ox.ac.uk/~vgg/research/very_deep/).
+Extract features from each patch.
+In our work, we used the *VGG 19-layer model*, which is available at [http://www.robots.ox.ac.uk/~vgg/research/very_deep/](http://www.robots.ox.ac.uk/~vgg/research/very_deep/).
 ```bash
 ls res/img/patch/ > res/img/patch_list.txt
 python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list res/img/patch_list.txt --input res/img/patch/ --output res/feats/

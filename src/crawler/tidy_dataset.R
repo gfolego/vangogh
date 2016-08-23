@@ -33,6 +33,7 @@ suppressPackageStartupMessages(library("data.table"))
 
 # Constants
 defaultDensity <- 196.3
+defaultRatio   <- 0.05
 
 
 # Printf
@@ -47,6 +48,9 @@ ParseArgs <- function() {
     parser$add_argument('-d', '--density', type='double', nargs=1,
                         default=defaultDensity,
                         help='minimum density value (in pixels per painted inch)')
+    parser$add_argument('-r', '--ratio', type='double', nargs=1,
+                        default=defaultRatio,
+                        help='maximum density ratio value')
     parser$add_argument('files', type='character', nargs='+',
                         help='input csv files')
     parser$add_argument('-v', '--verbose', action='count',
@@ -139,6 +143,7 @@ CleanDataset <- function(dataset) {
     # Calculate densities
     dataset[, "DensityHeight" := PixelHeight / RealHeightInches]
     dataset[, "DensityWidth"  := PixelWidth  / RealWidthInches]
+    dataset[, "DensityRatio"  := abs(DensityHeight - DensityWidth) / pmin(DensityHeight, DensityWidth)]
 
     # Remove duplicated painting IDs by keeping the larger images
     dataset <- dataset %>%
@@ -215,6 +220,12 @@ FilterMinimumDensity <- function(dataset, density = defaultDensity) {
     return (dataset)
 }
 
+# Filter by maximum density ratio
+FilterMaximumRatio <- function(dataset, ratio = defaultRatio) {
+    dataset <- dataset[DensityRatio <= ratio]
+    return (dataset)
+}
+
 
 # Main
 if (! interactive()) {
@@ -224,6 +235,7 @@ if (! interactive()) {
     output <- args$output
     files <- args$files
     density <- args$density
+    ratio <- args$ratio
     verbose <- args$verbose
 
     # Read all files and merge
@@ -236,6 +248,7 @@ if (! interactive()) {
 
     # Filter density
     dataset <- FilterMinimumDensity(dataset, density)
+    dataset <- FilterMaximumRatio(dataset, ratio)
 
     # Write output csv file
     WriteCSV(dataset, output)
