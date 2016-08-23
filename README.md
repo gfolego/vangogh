@@ -75,16 +75,14 @@ Note: images with less than 75% of JPEG quality were manually removed
 It is possible to check the quality with ImageMagick.
 
 ```bash
-identify -format "%f:%Q\n" res/img/orig/* | grep -v ^$ | sort -k2nr -t:
+identify -format "%f:%Q\n" res/img/orig/* | grep -v ^$ | sort -k2nr -k1 -t:
 ```
 
 
 Resize images to the standard density.
 ```bash
-python src/analysis/resize_images.py --csv res/db/db.csv --original res/img/orig/ --resized res/img/resz/
+python src/crawler/resize_images.py --csv res/db/db.csv --original res/img/orig/ --resized res/img/resz/
 ```
-
-Note: the file naming standard according to author has been applied manually.
 
 
 ### Using our method

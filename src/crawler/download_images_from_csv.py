@@ -39,7 +39,8 @@ import hashlib
 from progressbar import ProgressBar, Percentage, Bar, \
         AdaptiveETA, AdaptiveTransferSpeed
 from hurry.filesize import size, alternative
-from common import set_verbose_level, print_verbose, dir_type
+from common import set_verbose_level, print_verbose, dir_type, \
+        VG_PREFIX, NVG_PREFIX, LABEL_SEPARATOR, VVG_ARTIST
 
 
 def parse_args(argv):
@@ -58,16 +59,23 @@ def parse_args(argv):
 
 # Parse page entry
 def parse_entry(dest_dir, page,
-        idx_pageid, idx_imageurl, idx_sha1):
+        idx_pageid, idx_imageurl, idx_sha1, idx_artist):
 
     # Get values
     pageid = page[idx_pageid]
     image_url = page[idx_imageurl]
     image_sha1 = page[idx_sha1]
+    artist = page[idx_artist]
+
+    if artist == VVG_ARTIST:
+        prefx = VG_PREFIX
+    else:
+        prefx = NVG_PREFIX
 
     # Parse
     file_extension = os.path.splitext(image_url)[1]
-    image_path = os.path.join(dest_dir, pageid + file_extension)
+    image_path = os.path.join(dest_dir,
+            prefx + LABEL_SEPARATOR + pageid + file_extension)
 
     return image_path, image_url, image_sha1
 
@@ -128,13 +136,14 @@ def download_from_csv(csvfile, dest_dir):
     idx_pageid = field_names.index('PageID')
     idx_imageurl = field_names.index('ImageURL')
     idx_sha1 = field_names.index('ImageSHA1')
+    idx_artist = field_names.index('Artist')
 
     # For each page entry
     for page in reader:
 
         # Parse entry
         img_path, img_url, img_sha1 = parse_entry(dest_dir, page,
-                idx_pageid, idx_imageurl, idx_sha1)
+                idx_pageid, idx_imageurl, idx_sha1, idx_artist)
 
         # Download only if image does not exist
         if (not os.access(img_path, os.R_OK)):

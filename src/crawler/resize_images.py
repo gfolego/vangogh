@@ -38,7 +38,8 @@ from math import ceil
 from subprocess import check_call, check_output, list2cmdline
 from multiprocessing import Pool
 from common import set_verbose_level, get_verbose_level, print_verbose, \
-    dir_type, DEFAULT_DENSITY
+    dir_type, DEFAULT_DENSITY, \
+    VG_PREFIX, NVG_PREFIX, LABEL_SEPARATOR, VVG_ARTIST
 
 
 def parse_args(argv):
@@ -60,10 +61,18 @@ def parse_args(argv):
     return args
 
 # Parse paths from page entry
-def parse_entry_paths(orig_dir, dest_dir, pageid, img_url):
+def parse_entry_paths(orig_dir, dest_dir, pageid, img_url, artist):
     file_extension = os.path.splitext(img_url)[1]
-    orig_path = os.path.join(orig_dir, pageid + file_extension)
-    dest_path = os.path.join(dest_dir, pageid + '.png')
+
+    if artist == VVG_ARTIST:
+        prefx = VG_PREFIX
+    else:
+        prefx = NVG_PREFIX
+
+    fname = prefx + LABEL_SEPARATOR + pageid
+
+    orig_path = os.path.join(orig_dir, fname + file_extension)
+    dest_path = os.path.join(dest_dir, fname + '.png')
     return orig_path, dest_path
 
 # Parse final dimensions in pixels from real dimensions in inches
@@ -125,6 +134,7 @@ def resize_image(page):
     # Global params
     global gb_idx_pageid
     global gb_idx_img_url
+    global gb_idx_artist
     global gb_idx_realheight
     global gb_idx_realwidth
     global gb_density
@@ -134,11 +144,12 @@ def resize_image(page):
     # Parse values
     pageid = page[gb_idx_pageid]
     img_url = page[gb_idx_img_url]
+    artist = page[gb_idx_artist]
     realheight = float(page[gb_idx_realheight])
     realwidth = float(page[gb_idx_realwidth])
 
     # Parse paths
-    orig_path, dest_path = parse_entry_paths(gb_orig_dir, gb_dest_dir, pageid, img_url)
+    orig_path, dest_path = parse_entry_paths(gb_orig_dir, gb_dest_dir, pageid, img_url, artist)
 
     # Parse dimensions
     pixelheight, pixelwidth = parse_entry_sizes(gb_density, realheight, realwidth)
@@ -158,6 +169,7 @@ def resize_from_csv(csvfile, orig_dir, dest_dir, density):
     # Global params
     global gb_idx_pageid
     global gb_idx_img_url
+    global gb_idx_artist
     global gb_idx_realheight
     global gb_idx_realwidth
     global gb_density
@@ -173,6 +185,7 @@ def resize_from_csv(csvfile, orig_dir, dest_dir, density):
     # Indices
     gb_idx_pageid = field_names.index('PageID')
     gb_idx_img_url = field_names.index('ImageURL')
+    gb_idx_artist = field_names.index('Artist')
     gb_idx_realheight = field_names.index('RealHeightInches')
     gb_idx_realwidth = field_names.index('RealWidthInches')
 

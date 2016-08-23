@@ -36,8 +36,6 @@ import numpy as np
 
 
 # Some constants
-DEFAULT_DENSITY = 196.3
-
 VGG_MEAN_PIXEL = np.array([103.939, 116.779, 123.68])
 
 VG_CLASS = 1

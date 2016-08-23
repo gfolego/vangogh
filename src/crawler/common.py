@@ -39,6 +39,13 @@ from functools import total_ordering
 # Some constants
 API_URL = 'https://commons.wikimedia.org/w/api.php'
 
+DEFAULT_DENSITY = 196.3
+
+VG_PREFIX = 'vg'
+NVG_PREFIX = 'nvg'
+LABEL_SEPARATOR = '_'
+VVG_ARTIST = 'Vincent van Gogh'
+
 
 # Some global values
 verbose_lvl = 0
