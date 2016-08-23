@@ -18,13 +18,13 @@ If you find this work useful in your research, please cite!  :-)
 
 ---
 
-### Quick Guide
+## Quick Guide
 
 General note: all the scripts presented here have a `--help` argument,
 which describes the script and possible parameters.
 
 
-#### Creating the dataset
+### Creating the dataset
 
 Requirements
 
@@ -70,7 +70,7 @@ Download images.
 ```bash
 python src/crawler/download_images_from_csv.py --csv res/db/db.csv --directory res/img/orig/
 ```
-Note: images with with less than 75% of JPEG quality were manually removed
+Note: images with less than 75% of JPEG quality were manually removed
 (both images and respective entries in the CSV file).
 It is possible to check the quality with ImageMagick.
 
@@ -87,7 +87,7 @@ python src/analysis/resize_images.py --csv res/db/db.csv --original res/img/orig
 Note: the file naming standard according to author has been applied manually.
 
 
-#### Using our method
+### Using our method
 
 Requirements
 
@@ -115,5 +115,5 @@ python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_laye
 ```
 
 
-(to be continued ...)
+*(to be continued ...)*
 
