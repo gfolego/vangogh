@@ -93,23 +93,35 @@ Requirements
 - Parallel
 - Python, and the following packages:
     - scikit-image
+- Unzip
 
+
+From now on, we will assume the **vgdb_2016.zip** dataset file has been downloaded.
+
+Unzip the dataset.
+```bash
+unzip vgdb_2016.zip
+```
 
 Create a directory for resources.
 ```bash
-mkdir -pv res/{img/patch,feats}
+mkdir -pv vgdb_2016/{train,test}/{patch,feats}
 ```
 
 Extract patches from each image.
 ```bash
-find res/img/resz/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir res/img/patch/
+find vgdb_2016/train/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/train/patch/
+find vgdb_2016/test/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/test/patch/
 ```
 
 Extract features from each patch.
 In our work, we used the *VGG 19-layer model*, which is available at [http://www.robots.ox.ac.uk/~vgg/research/very_deep/](http://www.robots.ox.ac.uk/~vgg/research/very_deep/).
 ```bash
-ls res/img/patch/ > res/img/patch_list.txt
-python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list res/img/patch_list.txt --input res/img/patch/ --output res/feats/
+ls vgdb_2016/train/patch/ > vgdb_2016/train/patch_list.txt
+ls vgdb_2016/test/patch/ > vgdb_2016/test/patch_list.txt
+
+python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list vgdb_2016/train/patch_list.txt --input vgdb_2016/train/patch/ --output vgdb_2016/train/feats/
+python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list vgdb_2016/test/patch_list.txt --input vgdb_2016/test/patch/ --output vgdb_2016/test/feats/
 ```
 
 
