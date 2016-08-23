@@ -18,7 +18,7 @@ If you find this work useful in your research, please cite!  :-)
 
 ---
 
-## Quick Guide
+### Quick Guide
 
 General note: all the scripts presented here have a `--help` argument,
 which describes the script and possible parameters.
@@ -96,7 +96,7 @@ Requirements
 - Unzip
 
 
-From now on, we will assume the **vgdb_2016.zip** dataset file has been downloaded.
+From now on, we will assume that the **vgdb_2016.zip** dataset file has been downloaded.
 
 Unzip the dataset.
 ```bash
