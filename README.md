@@ -72,6 +72,11 @@ python src/crawler/download_images_from_csv.py --csv res/db/db.csv --directory r
 ```
 Note: images with with less than 75% of JPEG quality were manually removed
 (both images and respective entries in the CSV file).
+It is possible to check the quality with ImageMagick.
+
+```bash
+identify -format "%f:%Q\n" res/img/orig/* | grep -v ^$ | sort -k2nr -t:
+```
 
 
 Resize images to the standard density.
