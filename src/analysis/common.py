@@ -47,7 +47,7 @@ LABEL_SEPARATOR = '_'
 
 C_RANGE = 2.0 ** np.arange(-10, 16)
 GAMMA_RANGE = 2.0 ** np.arange(-15, 4)
-CLASS_WEIGHTS = [None, 'auto']
+CLASS_WEIGHTS = [None, 'balanced']
 
 K_FOLD = 3
 

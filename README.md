@@ -93,6 +93,7 @@ Requirements
 - Parallel
 - Python, and the following packages:
     - scikit-image
+    - scikit-learn
 - Unzip
 
 
@@ -123,6 +124,17 @@ ls vgdb_2016/test/patch/ > vgdb_2016/test/patch_list.txt
 python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list vgdb_2016/train/patch_list.txt --input vgdb_2016/train/patch/ --output vgdb_2016/train/feats/
 python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list vgdb_2016/test/patch_list.txt --input vgdb_2016/test/patch/ --output vgdb_2016/test/feats/
 ```
+
+Create a directory for the classification model
+```bash
+mkdir -pv vgdb_2016/clf
+```
+
+Generate classification model
+```bash
+python src/analysis/generate_model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --verbose
+```
+
 
 
 *(to be continued ...)*

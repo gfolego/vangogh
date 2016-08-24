@@ -22,10 +22,10 @@
 
 """
 ============================================================
-Classification
+Generate model
 ============================================================
 
-Classification using grid search with cross-validation
+Generate classification model with cross-validation
 
 """
 
@@ -67,11 +67,6 @@ def parse_args(argv):
 
     args = parser.parse_args(args=argv)
     return args
-
-
-def aggregate_predictions(pred):
-    counts = np.bincount(pred)
-    return np.argmax(counts)
 
 
 def generate_model(data, classes, args):
