@@ -1,10 +1,13 @@
-# From Impressionism to Expressionism: Automatically Identifying Van Gogh's Paintings
+# Automatically Identifying Van Gogh's Paintings
 
 This is the source code used in the paper
 "From Impressionism to Expressionism: Automatically
-Identifying Van Gogh's Paintings", which will be
+Identifying Van Gogh's Paintings", which has been
 published on the 23rd IEEE International Conference
 on Image Processing (ICIP 2016).
+
+The paper is available at IEEE Xplore:
+[https://dx.doi.org/10.1109/ICIP.2016.7532335](https://dx.doi.org/10.1109/ICIP.2016.7532335)
 
 The dataset is available at figshare:
 [https://dx.doi.org/10.6084/m9.figshare.3370627](https://dx.doi.org/10.6084/m9.figshare.3370627)
@@ -13,7 +16,19 @@ Corresponding author:
 Anderson Rocha ([anderson.rocha@ic.unicamp.br](mailto:anderson.rocha@ic.unicamp.br))
 
 
-If you find this work useful in your research, please cite!  :-)
+If you find this work useful in your research, please cite the paper!  :-)
+
+```
+@INPROCEEDINGS{7532335,
+author = {Guilherme Folego and Otavio Gomes and Anderson Rocha},
+booktitle = {2016 IEEE International Conference on Image Processing (ICIP)},
+title = {From Impressionism to Expressionism: Automatically Identifying Van Gogh's Paintings},
+year = {2016},
+pages = {141-145},
+keywords = {Art;Feature extraction;Painting;Support vector machines;Testing;Training;Visualization;CNN-based authorship attribution;Painter attribution;data-driven painting characterization},
+doi = {10.1109/ICIP.2016.7532335},
+month={Sept},}
+```
 
 
 ---
