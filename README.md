@@ -97,7 +97,7 @@ Requirements
 - Unzip
 
 
-From now on, we will assume that the **vgdb_2016.zip** dataset file has been downloaded.
+From now on, we will assume that the **vgdb_2016.zip** dataset file has already been downloaded.
 
 Unzip the dataset.
 ```bash
@@ -142,5 +142,5 @@ python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/cl
 
 **Done!**
 
-*(Please let us know if you are missing anything here!)*
+*(Please let us know if you are missing anything here)*
 
