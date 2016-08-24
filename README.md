@@ -140,6 +140,7 @@ Classify paintings in the test set using the Far method.
 python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl -pp --verbose
 ```
 
+**Done!**
 
-Please let us know if you are missing anything here!
+*(Please let us know if you are missing anything here!)*
 
