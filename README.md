@@ -7,7 +7,7 @@ published on the 23rd IEEE International Conference
 on Image Processing (ICIP 2016).
 
 The paper is available at IEEE Xplore:
-[https://dx.doi.org/10.1109/ICIP.2016.7532335](https://dx.doi.org/10.1109/ICIP.2016.7532335)
+[https://dx.doi.org/10.1109/icip.2016.7532335](https://dx.doi.org/10.1109/icip.2016.7532335)
 
 The dataset is available at figshare:
 [https://dx.doi.org/10.6084/m9.figshare.3370627](https://dx.doi.org/10.6084/m9.figshare.3370627)
