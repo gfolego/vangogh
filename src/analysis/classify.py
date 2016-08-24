@@ -22,10 +22,10 @@
 
 """
 ============================================================
-Classification
+Classify
 ============================================================
 
-Classification using grid search with cross-validation
+Classify using different aggregation methods
 
 """
 
@@ -76,14 +76,14 @@ def parse_args(argv):
     parser.add_argument('-m', '--model', type=str, required=True,
                         help='path to import the classifier model')
     parser.add_argument('-p', '--prob', action='count', default=0,
-                        help='use distance from margin (# is aggregation method')
+                        help='use distance from margin (# is aggregation method)')
 
 
     args = parser.parse_args(args=argv)
     return args
 
 
-def aggregate_predictions(pred):
+def agg_pred_mode(pred):
     print_verbose('Aggregating using mode ...', 0)
     counts = np.bincount(pred)
     return np.argmax(counts)
@@ -119,7 +119,7 @@ def agg_pred_dist_meangroup(pred, classes):
     return cl
 
 def agg_pred_dist_mediangroup(pred, classes):
-    print_verbose('Aggregating by comparing distance groups means ...', 0)
+    print_verbose('Aggregating by comparing distance groups medians ...', 0)
 
     arr_pos = pred[pred >= 0]
     med_pos = np.median(arr_pos) if (arr_pos.size > 0) else 0
@@ -159,7 +159,7 @@ def classify(data, labels, classes, args):
 
         # Aggregate
         if args.prob is 0:
-            res = aggregate_predictions(pred)
+            res = agg_pred_mode(pred)
         elif args.prob is 1:
             res = agg_pred_dist_sumall(pred, model.best_estimator_.classes_)
         elif args.prob is 2:
