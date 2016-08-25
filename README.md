@@ -19,15 +19,15 @@ Anderson Rocha ([anderson.rocha@ic.unicamp.br](mailto:anderson.rocha@ic.unicamp.
 If you find this work useful in your research, please cite the paper!  :-)
 
 ```
-@InProceedings{7532335,
+@InProceedings{folego2016vangogh,
     author = {Guilherme Folego and Otavio Gomes and Anderson Rocha},
     booktitle = {2016 IEEE International Conference on Image Processing (ICIP)},
     title = {From Impressionism to Expressionism: Automatically Identifying Van Gogh's Paintings},
     year = {2016},
-    month={Sept},
+    month = {Sept},
     pages = {141--145},
     keywords = {Art;Feature extraction;Painting;Support vector machines;Testing;Training;Visualization;CNN-based authorship attribution;Painter attribution;Data-driven painting characterization},
-    doi = {10.1109/ICIP.2016.7532335}
+    doi = {10.1109/icip.2016.7532335}
 }
 ```
 
