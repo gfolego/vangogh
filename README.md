@@ -153,10 +153,7 @@ python src/analysis/generate_model.py --dir vgdb_2016/train/feats/ --model vgdb_
 
 Classify paintings in the test set using the Far method.
 ```bash
-python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl -pp --verbose
+python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl --aggregation far --verbose
 ```
 
-**Done!**
-
-*(Please let us know if you are missing anything here)*
-
+Done!

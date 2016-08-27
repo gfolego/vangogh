@@ -42,6 +42,29 @@ from common import CACHE_SIZE, C_RANGE, GAMMA_RANGE, CLASS_WEIGHTS, N_ITER, K_FO
 from gather_data import gen_data, parse_class
 
 
+def parse_args(argv):
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+
+    parser.add_argument('-d', '--dir', type=dir_type, required=True,
+                        help='data directory')
+    parser.add_argument('-v', '--verbose', action='count',
+                        help='verbosity level')
+    parser.add_argument('-c', '--cores', default=get_n_cores(), type=int,
+                        choices=xrange(1, cpu_count()+1),
+                        help='number of cores to be used (default: %d)' % get_n_cores())
+    parser.add_argument('-m', '--model', type=str, required=True,
+                        help='path to import the classifier model')
+    parser.add_argument('-a', '--aggregation',
+                        choices=['mode','sum','mean','median','far'],
+                        default='far',
+                        help='aggregation method (default: far)')
+
+
+    args = parser.parse_args(args=argv)
+    return args
+
+
 def eval_perf(classification):
     y_true = []
     y_pred = []
@@ -59,27 +82,6 @@ def eval_perf(classification):
     print_verbose(metrics.confusion_matrix(y_true, y_pred), 0)
     print_verbose("Classification Report:", 0)
     print_verbose(metrics.classification_report(y_true, y_pred), 0)
-
-
-def parse_args(argv):
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-
-    parser.add_argument('-d', '--dir', type=dir_type, required=True,
-                        help='data directory')
-    parser.add_argument('-v', '--verbose', action='count',
-                        help='verbosity level')
-    parser.add_argument('-c', '--cores', default=get_n_cores(), type=int,
-                        choices=xrange(1, cpu_count()+1),
-                        help='number of cores to be used (default: %d)' % get_n_cores())
-    parser.add_argument('-m', '--model', type=str, required=True,
-                        help='path to import the classifier model')
-    parser.add_argument('-p', '--prob', action='count', default=0,
-                        help='use distance from margin (# is aggregation method)')
-
-
-    args = parser.parse_args(args=argv)
-    return args
 
 
 def agg_pred_mode(pred):
@@ -150,22 +152,22 @@ def classify(data, labels, classes, args):
         print_verbose("Classifying label: %s" % str(labels[test_index[0]]), 4)
 
         # Classify
-        if args.prob is 0:
+        if args.aggregation == 'mode':
             pred = model.predict(data[test_index])
         else:
             pred = model.decision_function(data[test_index])
         print_verbose("Patch prediction: %s" % str(pred), 4)
 
         # Aggregate
-        if args.prob is 0:
+        if args.aggregation == 'mode':
             res = agg_pred_mode(pred)
-        elif args.prob is 1:
+        elif args.aggregation == 'sum':
             res = agg_pred_dist_sumall(pred, model.best_estimator_.classes_)
-        elif args.prob is 2:
+        elif args.aggregation == 'far':
             res = agg_pred_dist_far(pred, model.best_estimator_.classes_)
-        elif args.prob is 3:
+        elif args.aggregation == 'mean':
             res = agg_pred_dist_meangroup(pred, model.best_estimator_.classes_)
-        elif args.prob is 4:
+        elif args.aggregation == 'median':
             res = agg_pred_dist_mediangroup(pred, model.best_estimator_.classes_)
         print_verbose("Aggregate result: %s" % str(res), 4)
 
