@@ -50,7 +50,7 @@ def parse_args(argv):
             help='csv file')
     parser.add_argument('-d', '--directory', type=dir_type, required=True,
             help='destination directory')
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
             help='verbosity level')
 
     args = parser.parse_args(args=argv)

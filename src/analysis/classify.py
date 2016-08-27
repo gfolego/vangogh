@@ -48,7 +48,7 @@ def parse_args(argv):
 
     parser.add_argument('-d', '--dir', type=dir_type, required=True,
                         help='data directory')
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='verbosity level')
     parser.add_argument('-c', '--cores', default=get_n_cores(), type=int,
                         choices=xrange(1, cpu_count()+1),

@@ -53,7 +53,7 @@ def parse_args(argv):
             help='directory for resized images')
     parser.add_argument('-d', '--density', type=float, default=DEFAULT_DENSITY,
             help='standard density (default: %.2f)' % DEFAULT_DENSITY)
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
             help='verbosity level')
 
     args = parser.parse_args(args=argv)

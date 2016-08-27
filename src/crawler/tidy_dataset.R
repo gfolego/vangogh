@@ -52,7 +52,7 @@ ParseArgs <- function() {
                         help='maximum density ratio value')
     parser$add_argument('files', type='character', nargs='+',
                         help='input csv files')
-    parser$add_argument('-v', '--verbose', action='count',
+    parser$add_argument('-v', '--verbose', action='count', default=0,
                         help='verbosity level')
 
 

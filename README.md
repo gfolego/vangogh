@@ -36,6 +36,10 @@ If you find this work useful in your research, please cite the paper!  :-)
 
 ### Quick Guide
 
+This guide has two sections, namely, *Creating the dataset* and *Using our method*.
+The first one describes how to create your own dataset, or (even better!) to expand on **VGDB-2016**.
+The second one describes how to use our method, given a dataset.
+
 General note: all the scripts presented here have a `--help` argument,
 which describes the script and possible parameters.
 
@@ -148,12 +152,12 @@ mkdir -pv vgdb_2016/clf
 
 Generate classification model.
 ```bash
-python src/analysis/generate_model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --verbose
+python src/analysis/generate_model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl
 ```
 
 Classify paintings in the test set using the Far method.
 ```bash
-python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl --aggregation far --verbose
+python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl --aggregation far
 ```
 
 Done!

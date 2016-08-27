@@ -60,7 +60,7 @@ def parse_args(argv):
                         help='input images directory')
     parser.add_argument('-o', '--output', type=dir_type, required=True,
                         help='output features directory')
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='verbosity level')
 
     args = parser.parse_args(args=argv)

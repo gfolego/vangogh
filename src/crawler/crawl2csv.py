@@ -45,7 +45,7 @@ def parse_args(argv):
             help='page url')
     parser.add_argument('-c', '--csv', type=argparse.FileType('w'), required=True,
             help='csv file')
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
             help='verbosity level')
 
     args = parser.parse_args(args=argv)

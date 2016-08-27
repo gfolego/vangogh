@@ -55,7 +55,7 @@ def parse_args(argv):
                         help='number of iterations for random search (default: %d)' % N_ITER)
     parser.add_argument('-d', '--dir', type=dir_type, required=True,
                         help='data directory')
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='verbosity level')
     parser.add_argument('-c', '--cores', default=int(cpu_count()-2), type=int,
                         choices=xrange(1, cpu_count()+1),

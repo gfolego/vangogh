@@ -54,7 +54,7 @@ def parse_args(argv):
     parser.add_argument('-c', '--cores', default=get_n_cores(), type=int,
                         choices=xrange(1, cpu_count()+1),
                         help='number of cores to be used (default: %d) -- currently not used' % get_n_cores())
-    parser.add_argument('-v', '--verbose', action='count',
+    parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='verbosity level')
 
     args = parser.parse_args(args=argv)
