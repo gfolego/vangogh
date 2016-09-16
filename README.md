@@ -131,8 +131,8 @@ mkdir -pv vgdb_2016/{train,test}/{patch,feats}
 
 Extract patches from each image.
 ```bash
-find vgdb_2016/train/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/train/patch/
-find vgdb_2016/test/ -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/test/patch/
+find vgdb_2016/train/{,n}vg -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/train/patch/
+find vgdb_2016/test/{,n}vg -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/test/patch/
 ```
 
 Extract features from each patch.
