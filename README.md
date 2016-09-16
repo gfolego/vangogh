@@ -157,7 +157,31 @@ python src/analysis/generate_model.py --dir vgdb_2016/train/feats/ --model vgdb_
 
 Classify paintings in the test set using the Far method.
 ```bash
-python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl --aggregation far
+python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/clf/model.pkl --aggregation far --gtruth
 ```
 
 Done!
+
+#### Predicting debated paintings
+Create a directory for resources.
+```bash
+mkdir -pv vgdb_2016/check/{patch,feats}
+```
+
+Extract patches from each image.
+```bash
+find vgdb_2016/check/[0-9]*.png -maxdepth 1 -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/check/patch/
+```
+
+Extract features from each patch.
+```bash
+ls vgdb_2016/check/patch/ > vgdb_2016/check/patch_list.txt
+python src/analysis/caffe_extract_features.py --proto path/to/VGG_ILSVRC_19_layers_deploy.prototxt --model path/to/VGG_ILSVRC_19_layers.caffemodel --list vgdb_2016/check/patch_list.txt --input vgdb_2016/check/patch/ --output vgdb_2016/check/feats/
+```
+
+Classify paintings using the Far method.
+```bash
+python src/analysis/classify.py --dir vgdb_2016/check/feats/ --model vgdb_2016/clf/model.pkl --aggregation far
+```
+
+In the output, class 1 means *van Gogh*, and class 0 means *non-van Gogh*.

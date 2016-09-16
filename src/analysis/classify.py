@@ -59,6 +59,8 @@ def parse_args(argv):
                         choices=['mode','sum','mean','median','far'],
                         default='far',
                         help='aggregation method (default: far)')
+    parser.add_argument('-g', '--gtruth', action='store_true',
+                        help='ground truth class is available (default: False)')
 
 
     args = parser.parse_args(args=argv)
@@ -76,6 +78,10 @@ def eval_perf(classification):
         print_verbose("Classification pair: %s" % str((key, value)), 4)
         print_verbose("True classes: %s" % str(y_true), 5)
         print_verbose("Predicted classes: %s" % str(y_pred), 5)
+
+    # Print results
+    print_verbose("True classes: %s" % str(y_true), 2)
+    print_verbose("Predicted classes: %s" % str(y_pred), 2)
 
     # Print metrics
     print_verbose("Confusion Matrix:", 0)
@@ -133,7 +139,7 @@ def agg_pred_dist_mediangroup(pred, classes):
 
 
 
-def classify(data, labels, classes, args):
+def classify(data, labels, args):
 
     classification = {}
 
@@ -188,20 +194,20 @@ def main(argv):
     print_verbose("Args: %s" % str(args), 1)
 
     # Some tests
-    data, labels, classes = gen_data(args.dir)
+    data, labels = gen_data(args.dir, False)
+
     print_verbose('Data: %s' % str(data), 5)
     print_verbose('Labels: %s' % str(labels), 4)
-    print_verbose('Classes: %s' % str(classes), 4)
 
     print_verbose('Data shape: %s' % str(data.shape), 2)
     print_verbose('Labels shape: %s' % str(labels.shape), 2)
-    print_verbose('Classes shape: %s' % str(classes.shape), 2)
 
-    classification = classify(data, labels, classes, args)
+    classification = classify(data, labels, args)
     print_verbose('Final classification: %s' % str(classification), 0)
 
     # Evaluate performance
-    eval_perf(classification)
+    if args.gtruth:
+        eval_perf(classification)
 
 
 if __name__ == "__main__":

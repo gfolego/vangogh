@@ -93,25 +93,30 @@ def parse_class(filename):
 
 def parse_label(filename):
     groups = filename.split(LABEL_SEPARATOR)
-    label = LABEL_SEPARATOR.join(groups[:2])
+    label = LABEL_SEPARATOR.join(groups[:len(groups)-1])
     print_verbose('File %s label: %s' % (filename, label), 4)
     return label
 
 
-def gen_data(dirname):
+def gen_data(dirname, gtruth=True):
     files = list_files(dirname)
     full_paths = map(lambda x: os.path.join(dirname, x), files)
     print_verbose('Dir %s full file path: %s' % (dirname, str(full_paths)), 4)
 
     data = apply_multicore_function(read_data, full_paths)
     labels = apply_multicore_function(parse_label, files)
-    classes = apply_multicore_function(parse_class, files)
+    if gtruth:
+        classes = apply_multicore_function(parse_class, files)
 
     data = np.asarray(data, dtype=np.float)
     labels = np.asarray(labels, dtype=np.str)
-    classes = np.asarray(classes, dtype=np.uint8)
+    if gtruth:
+        classes = np.asarray(classes, dtype=np.uint8)
 
-    return data, labels, classes
+    if gtruth:
+        return data, labels, classes
+    else:
+        return data, labels
 
 
 def main(argv):
