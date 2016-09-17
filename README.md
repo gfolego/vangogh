@@ -34,7 +34,7 @@ If you find this work useful in your research, please cite the paper!  :-)
 
 ---
 
-### Quick Guide
+## Quick Guide
 
 This guide has four sections:
 
