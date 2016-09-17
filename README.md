@@ -197,6 +197,6 @@ In the output, class 1 means *van Gogh*, and class 0 means *non-van Gogh*.
 
 Generate scores  model.
 ```bash
-python src/analysis/generate_score/model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --score vgdb_2016/clf/score.pkl
+python src/analysis/generate_score_model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --score vgdb_2016/clf/score.pkl
 ```
 
