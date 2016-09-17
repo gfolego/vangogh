@@ -145,7 +145,7 @@ def main(argv):
 
     # Export
     print_verbose('Saving model to %s' % args.score, 0)
-    with open(args.model, "wb") as f:
+    with open(args.score, "wb") as f:
         pickle.dump(model, f)
 
     print_verbose('Done!', 0)
