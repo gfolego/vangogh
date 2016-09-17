@@ -50,7 +50,7 @@ which describes the script and possible parameters.
 
 ## Creating the dataset
 
-Requirements
+Requirements (for this section)
 
 - ImageMagick
 - Python, and the following packages:
@@ -111,7 +111,7 @@ python src/crawler/resize_images.py --csv res/db/db.csv --original res/img/orig/
 
 ## Using our method
 
-Requirements
+Requirements (for all the following sections)
 
 - Caffe
 - Parallel
