@@ -170,7 +170,7 @@ mkdir -pv vgdb_2016/check/{patch,feats}
 
 Extract patches from each image.
 ```bash
-find vgdb_2016/check/[0-9]*.png -maxdepth 1 -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/check/patch/
+find vgdb_2016/check/[0-9]*.png -type f | parallel python src/analysis/patch_extraction.py --image {} --dir vgdb_2016/check/patch/
 ```
 
 Extract features from each patch.
