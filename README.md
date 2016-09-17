@@ -36,15 +36,19 @@ If you find this work useful in your research, please cite the paper!  :-)
 
 ### Quick Guide
 
-This guide has two sections, namely, *Creating the dataset* and *Using our method*.
-The first one describes how to create your own dataset, or (even better!) to expand on **VGDB-2016**.
-The second one describes how to use our method, given a dataset.
+This guide has four sections:
+
+1. *Creating the dataset* - Create your own dataset, or (even better!) expand on **VGDB-2016**.
+2. *Using our method* - Use our method, given a dataset.
+3. *Predicting debated paintings* - Predict debated paintings with our method.
+4. *Calculating scores* - Transform distances into probabilities.
+
 
 General note: all the scripts presented here have a `--help` argument,
 which describes the script and possible parameters.
 
 
-### Creating the dataset
+## Creating the dataset
 
 Requirements
 
@@ -105,7 +109,7 @@ python src/crawler/resize_images.py --csv res/db/db.csv --original res/img/orig/
 ```
 
 
-### Using our method
+## Using our method
 
 Requirements
 
@@ -162,7 +166,9 @@ python src/analysis/classify.py --dir vgdb_2016/test/feats/ --model vgdb_2016/cl
 
 Done!
 
-#### Predicting debated paintings
+
+## Predicting debated paintings
+
 Create a directory for resources.
 ```bash
 mkdir -pv vgdb_2016/check/{patch,feats}
@@ -185,3 +191,12 @@ python src/analysis/classify.py --dir vgdb_2016/check/feats/ --model vgdb_2016/c
 ```
 
 In the output, class 1 means *van Gogh*, and class 0 means *non-van Gogh*.
+
+
+## Calculating scores
+
+Generate scores  model.
+```bash
+python src/analysis/generate_score/model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --score vgdb_2016/clf/score.pkl
+```
+

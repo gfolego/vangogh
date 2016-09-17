@@ -58,6 +58,11 @@ WINDOW_SIZE = 224
 CAFFE_BATCH_SIZE = 10
 
 
+# Score model
+SCORE_MAX_ITER = 1000
+SCORE_K_FOLD = 5
+
+
 # Some global values
 verbose_lvl = 0
 n_cores = 1
