@@ -200,3 +200,12 @@ Generate scores  model.
 python src/analysis/generate_score_model.py --dir vgdb_2016/train/feats/ --model vgdb_2016/clf/model.pkl --score vgdb_2016/clf/score.pkl
 ```
 
+Calculate score probabilities. Targets are the filenames without extension, separated by comma.
+```bash
+targets='9414428,9420113'
+echo targets | sed s/,/\\n/ > vgdb_2016/check/target_list.txt
+python src/analysis/get_scores.py --dir vgdb_2016/check/feats/ --model vgdb_2016/clf/model.pkl --score vgdb_2016/clf/score.pkl --targets vgdb_2016/check/target_list.txt
+```
+
+In the output, the first column represents *non-van Gogh*, and the second column represents *van Gogh*.
+
